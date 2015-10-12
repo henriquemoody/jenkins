@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+VERSION="${1}"
+VERSION_PATH="/opt/php/${1}/bin"
+CLEAN_PATH=$(echo $PATH | sed 's,^/opt/php/[57]\.[0-9]/bin:,,')
+
+if [ -z "${VERSION}" ]; then
+    echo "Version cannot be empty." 1>&2
+    exit 1
+fi
+
+if [ ! -d "${VERSION_PATH}" ]; then
+    echo "‘${VERSION}’ is not a recognized version." 1>&2
+    exit 2
+fi
+
+export PATH="${VERSION_PATH}:${CLEAN_PATH}"
+
+echo "# Run eval \$(php-path ${VERSION}) to define the version"
+echo "export PATH=\"${VERSION_PATH}:${CLEAN_PATH}\""

@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+language: bash
+
+script:
+  - docker build -t "henriquemoody/jenkins" .
+
+after_script:
+  - docker images
